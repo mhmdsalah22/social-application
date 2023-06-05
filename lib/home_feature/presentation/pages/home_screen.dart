@@ -49,7 +49,7 @@ class HomeScreen extends StatelessWidget {
                 shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),
                 itemBuilder: (context, index) => BuildPostItem(
-                  snap: snapshot.data!.docs[index].data(),
+                  snap: snapshot.data?.docs[index].data(),
                 ),
                 separatorBuilder: (context, index) => const SizedBox(
                   height: 8.0,

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:social_application/core/styles/icon_broken.dart';
 import 'package:social_application/new_post_feature/presentation/pages/new_post_screen.dart';
+import 'package:social_application/search_feature/presentation/pages/search_screen.dart';
 import 'package:social_application/social_layout/manager/social_layout_cubit/social_layout_cubit.dart';
 import 'package:social_application/social_layout/manager/social_layout_cubit/social_layout_states.dart';
 
@@ -14,7 +15,7 @@ class SocialLayout extends StatelessWidget {
       listener: (context, state) {
         if (state is ChangeBottomState) {
           Navigator.push(context,
-              MaterialPageRoute(builder: (context) =>  NewPostScreen()));
+              MaterialPageRoute(builder: (context) => NewPostScreen()));
         }
       },
       builder: (context, state) {
@@ -26,10 +27,20 @@ class SocialLayout extends StatelessWidget {
             ),
             actions: [
               IconButton(
-                  onPressed: () {},
-                  icon: const Icon(IconBroken.Notification)),
+                onPressed: () {},
+                icon: const Icon(
+                  IconBroken.Notification,
+                ),
+              ),
               IconButton(
-                  onPressed: () {}, icon: const Icon(IconBroken.Search)),
+                onPressed: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => SearchScreen()));
+                },
+                icon: const Icon(
+                  IconBroken.Search,
+                ),
+              ),
             ],
           ),
           body: cubit.screens[cubit.currentIndex],
@@ -48,7 +59,7 @@ class SocialLayout extends StatelessWidget {
             ],
             currentIndex: cubit.currentIndex,
             onTap: (int index) {
-              cubit.changeBottomBar(index);
+              cubit.changeBottomBar(index, context);
             },
           ),
         );

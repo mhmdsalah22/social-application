@@ -1,5 +1,7 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:social_application/chats_feature/manager/get_all_users_cubit/get_all_users_cubit.dart';
 import 'package:social_application/chats_feature/presentation/pages/chats_screen.dart';
 import 'package:social_application/home_feature/presentation/pages/home_screen.dart';
 import 'package:social_application/new_post_feature/presentation/pages/new_post_screen.dart';
@@ -17,9 +19,9 @@ class SocialLayoutCubit extends Cubit<SocialLayoutStates> {
   List<Widget> screens = [
     const HomeScreen(),
     const ChatsScreen(),
-     NewPostScreen(),
+    NewPostScreen(),
     const UsersScreen(),
-     SettingScreen(),
+    SettingScreen(uid: FirebaseAuth.instance.currentUser?.uid??'sew1lCAVSmOPCDZ7ZRC2EIrPm812',),
   ];
 
   List<String> titles = [
@@ -27,13 +29,13 @@ class SocialLayoutCubit extends Cubit<SocialLayoutStates> {
     'Chats',
     'New Post',
     'Users',
-    'Setting',
+    'Profile',
   ];
 
-
-
-
-  void changeBottomBar(int index) {
+  void changeBottomBar(int index, BuildContext context) {
+    if (index == 1) {
+      GetAllUsersCubit.get(context).getAllUsers();
+    }
     if (index == 2) {
       emit(ChangeBottomState());
     } else {

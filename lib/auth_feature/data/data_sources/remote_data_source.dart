@@ -45,7 +45,7 @@ class RemoteDataSource {
       required String phone,
       required String uId}) {
     try {
-      SocialUserModel  model = SocialUserModel (
+      SocialUserModel model = SocialUserModel(
           name: name,
           email: email,
           phone: phone,
@@ -53,8 +53,10 @@ class RemoteDataSource {
           image:
               'https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png',
           bio: 'Write your bio ....',
-          cover: 'https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png'
-      );
+          cover:
+              'https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png',
+          followers: [],
+          following: []);
       final result = FirebaseFirestore.instance
           .collection('users')
           .doc(uId)

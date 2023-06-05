@@ -1,194 +1,66 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:social_application/core/styles/icon_broken.dart';
-import 'package:social_application/core/utiles/contants.dart';
-import 'package:social_application/edit_profile/presentation/pages/edit_profile_screen.dart';
 import 'package:social_application/setting_feature/manager/get_user_cubit/get_user_cubit.dart';
 import 'package:social_application/setting_feature/manager/get_user_cubit/get_user_states.dart';
+import 'package:social_application/setting_feature/presentation/widgets/bio.dart';
+import 'package:social_application/setting_feature/presentation/widgets/buttons_in_setting_screen.dart';
+import 'package:social_application/setting_feature/presentation/widgets/cover_image_for_user.dart';
+import 'package:social_application/setting_feature/presentation/widgets/posts.dart';
+import '../widgets/general_data_for_the_user_is_page.dart';
+import '../widgets/name_in_profile.dart';
+import '../widgets/profile_image_for_user.dart';
 
 class SettingScreen extends StatelessWidget {
-   SettingScreen({Key? key}) : super(key: key);
+  const SettingScreen({Key? key, required this.uid}) : super(key: key);
+  final String uid;
 
-   @override
+  @override
   Widget build(BuildContext context) {
     return BlocBuilder<GetUserCubit, GetUserStates>(
       builder: (context, state) {
         if (state is SocialGetUserSuccessState) {
-          return Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Column(
-              children: [
-                SizedBox(
-                  height: 190,
-                  child: Stack(
-                    alignment: Alignment.bottomCenter,
-                    children: [
-                      Align(
-                        alignment: Alignment.topCenter,
-                        child: Container(
-                          height: 140,
-                          width: double.infinity,
-                          decoration: BoxDecoration(
-                            borderRadius: const BorderRadius.only(
-                              topLeft: Radius.circular(4),
-                              topRight: Radius.circular(4),
-                            ),
-                            image: DecorationImage(
-                              image: NetworkImage(
-                                state.model.cover,
-                              ),
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                        ),
-                      ),
-                      CircleAvatar(
-                        radius: 64,
-                        backgroundColor:
-                            Theme.of(context).scaffoldBackgroundColor,
-                        child: CircleAvatar(
-                          radius: 60,
-                          backgroundImage: NetworkImage(
-                              state.model.image
-                          ),
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-                const SizedBox(
-                  height: 5,
-                ),
-                Text(
-                  state.model.name,
-                  style: Theme.of(context).textTheme.bodyMedium,
-                ),
-                Text(
-                  state.model.bio,
-                  style: Theme.of(context).textTheme.bodySmall,
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 20),
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: InkWell(
-                          child: Column(
-                            children: [
-                              Text(
-                                '100',
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .titleMedium
-                                    ?.copyWith(
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                              ),
-                              Text(
-                                'Posts',
-                                style: Theme.of(context).textTheme.bodySmall,
-                              ),
-                            ],
-                          ),
-                          onTap: () {},
-                        ),
-                      ),
-                      Expanded(
-                        child: InkWell(
-                          child: Column(
-                            children: [
-                              Text(
-                                '100',
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .titleMedium
-                                    ?.copyWith(
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                              ),
-                              Text(
-                                'Photos',
-                                style: Theme.of(context).textTheme.bodySmall,
-                              ),
-                            ],
-                          ),
-                          onTap: () {},
-                        ),
-                      ),
-                      Expanded(
-                        child: InkWell(
-                          child: Column(
-                            children: [
-                              Text(
-                                '100',
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .titleMedium
-                                    ?.copyWith(
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                              ),
-                              Text(
-                                'Followers',
-                                style: Theme.of(context).textTheme.bodySmall,
-                              ),
-                            ],
-                          ),
-                          onTap: () {},
-                        ),
-                      ),
-                      Expanded(
-                        child: InkWell(
-                          child: Column(
-                            children: [
-                              Text(
-                                '100',
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .titleMedium
-                                    ?.copyWith(
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                              ),
-                              Text(
-                                'Followings',
-                                style: Theme.of(context).textTheme.bodySmall,
-                              ),
-                            ],
-                          ),
-                          onTap: () {},
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                Row(
+          return SingleChildScrollView(
+            child: Container(
+              color: Colors.white,
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
                   children: [
-                    Expanded(
-                        child: OutlinedButton(
-                      onPressed: () {},
-                      child: Text(
-                        'Add Photos',
-                        style: Theme.of(context)
-                            .textTheme
-                            .titleMedium
-                            ?.copyWith(color: defaultColor, fontSize: 18),
+                    SizedBox(
+                      height: 190,
+                      child: Stack(
+                        alignment: Alignment.bottomCenter,
+                        children: [
+                          CoverImageForUser(
+                            uId: uid,
+                          ),
+                          ProfileImageForUser(
+                            uId: uid,
+                          ),
+                        ],
                       ),
-                    )),
-                    const SizedBox(
-                      width: 10,
                     ),
-                    OutlinedButton(
-                      onPressed: () {
-                        Navigator.push(context, MaterialPageRoute(builder: (context)=> EditProfileScreen()));
-                      },
-                      child: const Icon(IconBroken.Edit),
-                    )
+                    const SizedBox(
+                      height: 5,
+                    ),
+                    NameInProfile(uId: uid,),
+                    Bio(
+                      uId: uid,
+                    ),
+                    GeneralDataForTheUserIsPage(uId: uid),
+                    ButtonsInSettingScreen(
+                      uId: uid,
+                    ),
+                    const SizedBox(
+                      height: 12,
+                    ),
+                    Posts(
+                      uId: uid,
+                    ),
                   ],
                 ),
-              ],
+              ),
             ),
           );
         } else if (state is SocialGetUserLoadingState) {

@@ -81,7 +81,6 @@ class GetUserCubit extends Cubit<GetUserStates> {
     });
   }
 
-
   void uploadCoverImage({
     required String name,
     required String email,
@@ -97,7 +96,8 @@ class GetUserCubit extends Cubit<GetUserStates> {
         if (state is! SocialGetUserSuccessState) return;
         final currentState = state as SocialGetUserSuccessState;
         emit(UploadCoverImageSuccessState(model: currentState.model));
-        updateUser(name: name, email: email, phone: phone, bio: bio , cover: value);
+        updateUser(
+            name: name, email: email, phone: phone, bio: bio, cover: value);
       }).catchError((error) {
         emit(UploadCoverImageErrorState(error.toString()));
       });
@@ -105,7 +105,6 @@ class GetUserCubit extends Cubit<GetUserStates> {
       emit(UploadCoverImageErrorState(error.toString()));
     });
   }
-
 
   void updateUser({
     required String name,
@@ -127,6 +126,8 @@ class GetUserCubit extends Cubit<GetUserStates> {
       uId: currentState.model.uId,
       cover: cover ?? currentState.model.cover,
       image: image ?? currentState.model.image,
+      followers: [],
+      following: [],
     );
 
     FirebaseFirestore.instance
@@ -135,12 +136,9 @@ class GetUserCubit extends Cubit<GetUserStates> {
         .update(model.toMap())
         .then((value) {
       getUserData();
-
     }).catchError((error) {
       emit(UserUpdateErrorState(error.toString()));
       print(error.toString());
     });
   }
-
-
 }

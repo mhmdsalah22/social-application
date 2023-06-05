@@ -8,8 +8,10 @@ class SocialUserModel extends Equatable {
   final String image;
   final String cover;
   final String bio;
+  final List followers;
+  final List following;
 
-   const SocialUserModel({
+  const SocialUserModel({
     required this.name,
     required this.email,
     required this.phone,
@@ -17,6 +19,8 @@ class SocialUserModel extends Equatable {
     required this.cover,
     required this.uId,
     required this.bio,
+    required this.followers,
+    required this.following,
   });
 
   factory SocialUserModel.fromJson(Map<String, dynamic> json) {
@@ -28,6 +32,8 @@ class SocialUserModel extends Equatable {
       cover: json['cover'],
       uId: json['uId'],
       bio: json['bio'],
+      followers: json['followers'],
+      following: json['following'],
     );
   }
 
@@ -40,9 +46,12 @@ class SocialUserModel extends Equatable {
       'cover': cover,
       'uId': uId,
       'bio': bio,
+      'following': following,
+      'followers': followers
     };
   }
 
   @override
-  List<Object?> get props => [name, email, phone, uId, cover, image, bio];
+  List<Object?> get props =>
+      [name, email, phone, uId, cover, image, bio, following, followers];
 }

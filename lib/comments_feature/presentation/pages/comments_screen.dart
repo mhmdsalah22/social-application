@@ -13,8 +13,7 @@ import 'package:social_application/new_post_feature/manager/user_info_cubit/user
 class CommentsScreen extends StatelessWidget {
   final String postId;
 
-  CommentsScreen({Key? key, required this.postId})
-      : super(key: key);
+  CommentsScreen({Key? key, required this.postId}) : super(key: key);
   final TextEditingController _commentController = TextEditingController();
 
   @override
@@ -65,7 +64,7 @@ class CommentsScreen extends StatelessWidget {
                           separatorBuilder: (context, index) => const SizedBox(
                             height: 7,
                           ),
-                          itemCount: (snapshot.data ).docs.length,
+                          itemCount: (snapshot.data).docs.length,
                         );
                       },
                     ),
@@ -105,6 +104,7 @@ class CommentsScreen extends StatelessWidget {
                                   text: _commentController.text,
                                   uId: uId!,
                                 );
+                                _commentController.clear();
                               },
                               child: Container(
                                 padding: const EdgeInsets.symmetric(
