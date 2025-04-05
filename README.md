@@ -58,8 +58,3 @@ To set up the project locally:
 4. Run the app:
    ```bash
    flutter run
-
-
-
-
-   
