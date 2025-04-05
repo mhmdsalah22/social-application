@@ -2,6 +2,11 @@
 
 A cross-platform **social networking application** built with **Flutter**, designed to connect users, facilitate content sharing, and enhance real-time communication. This project showcases various social features alongside a seamless user experience.
 
+## Screenshots:
+![image_original](https://github.com/user-attachments/assets/bd856bf5-6f28-4b3b-94da-59b9abe88c7d)
+![image_original (2)](https://github.com/user-attachments/assets/2678e6b7-8d9f-4faf-b07c-d369f693141c)
+![image_original (1)](https://github.com/user-attachments/assets/c8f0d7a3-59c1-4e1f-a991-0170fdc84298)
+
 ## Features
 
 ### Content Creation and Sharing
@@ -55,9 +60,6 @@ To set up the project locally:
    flutter run
 
 
-## Screenshots:
-![image_original](https://github.com/user-attachments/assets/bd856bf5-6f28-4b3b-94da-59b9abe88c7d)
-![image_original (2)](https://github.com/user-attachments/assets/2678e6b7-8d9f-4faf-b07c-d369f693141c)
-![image_original (1)](https://github.com/user-attachments/assets/c8f0d7a3-59c1-4e1f-a991-0170fdc84298)
+
 
    
